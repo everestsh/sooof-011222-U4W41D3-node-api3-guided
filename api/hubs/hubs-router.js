@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  // validateHub,
+  validateHub,
   checkHubId,
  } = require('./hubs-middleware');
 
@@ -46,7 +46,7 @@ router.get('/:id', checkHubId, (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', validateHub, (req, res, next) => {
   Hubs.add(req.body)
     .then(hub => {
       res.status(201).json(hub);
@@ -81,7 +81,7 @@ router.delete('/:id', checkHubId, (req, res, next) => {
     });
 });
 
-router.put('/:id', checkHubId, (req, res, next) => {
+router.put('/:id', checkHubId, validateHub, (req, res, next) => {
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       if (hub) {

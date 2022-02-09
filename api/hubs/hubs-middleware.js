@@ -27,10 +27,11 @@ function validateHub(req, res, next) {
     if (!req.body.name) {
       next({ status: 422, message: "Please provide a name" })
     } else {
-      next()
+     next()
     }
   }
 
 module.exports = {
     checkHubId,
+    validateHub,
 }
