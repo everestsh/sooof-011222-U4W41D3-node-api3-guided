@@ -6,6 +6,7 @@ const server = express();
 
 server.use(express.json());
 
+server.use('/api/hubs', hubsRouter);
 
 server.use((req, res, next)=>{
   // here we can do whatever:
@@ -21,7 +22,6 @@ server.use((req, res, next)=>{
   next({ status: 422, message: 'this is horrible'})
 })
 
-server.use('/api/hubs', hubsRouter);
 
 
 server.get('/', (req, res) => {
