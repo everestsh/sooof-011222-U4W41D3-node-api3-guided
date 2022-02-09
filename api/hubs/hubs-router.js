@@ -60,7 +60,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', checkHubId, (req, res, next) => {
   Hubs.remove(req.params.id)
     .then(count => {
       if (count > 0) {
@@ -79,7 +79,7 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', checkHubId, (req, res, next) => {
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       if (hub) {
@@ -98,7 +98,7 @@ router.put('/:id', (req, res, next) => {
     });
 });
 
-router.get('/:id/messages', (req, res, next) => {
+router.get('/:id/messages', checkHubId, (req, res, next) => {
   Hubs.findHubMessages(req.params.id)
     .then(messages => {
       res.status(200).json(messages);
@@ -113,7 +113,7 @@ router.get('/:id/messages', (req, res, next) => {
     });
 });
 
-router.post('/:id/messages', (req, res) => {
+router.post('/:id/messages', checkHubId, (req, res) => {
   const messageInfo = { ...req.body, hub_id: req.params.id };
 
   Messages.add(messageInfo)
