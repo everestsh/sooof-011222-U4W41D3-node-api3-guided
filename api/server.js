@@ -6,7 +6,22 @@ const server = express();
 
 server.use(express.json());
 
+
+server.use((req, res, next)=>{
+  // here we can do whatever:
+  // 1- respond to clients
+  // 2- simply allow the request to flow to the next middleware
+  // 3- respond with an error
+  // res.json('foobar')
+
+  console.log('the req flowed through our custom middleware')
+  // res.set('X-Web-49', 'Rocks') // setting a header on the response
+  // res.set('Set-Cookie', 'foo=bar') // setting a cookie on the browser
+  next()
+})
+
 server.use('/api/hubs', hubsRouter);
+
 
 server.get('/', (req, res) => {
   res.send(`
