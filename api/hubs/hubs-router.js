@@ -1,4 +1,8 @@
 const express = require('express');
+const {
+  // validateHub,
+  checkHubId,
+ } = require('./hubs-middleware');
 
 const Hubs = require('./hubs-model.js');
 const Messages = require('../messages/messages-model.js');
@@ -20,7 +24,9 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
+
+//  http get :9000/api/hubs/1 
+router.get('/:id', checkHubId, (req, res, next) => {
   Hubs.findById(req.params.id)
     .then(hub => {
       if (hub) {
