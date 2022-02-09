@@ -29,11 +29,12 @@ router.get('/', (req, res, next) => {
 router.get('/:id', checkHubId, (req, res, next) => {
   Hubs.findById(req.params.id)
     .then(hub => {
-      if (hub) {
-        res.status(200).json(hub);
-      } else {
-        res.status(404).json({ message: 'Hub not found' });
-      }
+      // if (hub) {
+      //   res.status(200).json(hub);
+      // } else {
+      //   res.status(404).json({ message: 'Hub not found' });
+      // }
+      res.status(200).json(hub);
     })
     .catch(error => {
       // log error to server
@@ -63,11 +64,12 @@ router.post('/', (req, res, next) => {
 router.delete('/:id', checkHubId, (req, res, next) => {
   Hubs.remove(req.params.id)
     .then(count => {
-      if (count > 0) {
-        res.status(200).json({ message: 'The hub has been nuked' });
-      } else {
-        res.status(404).json({ message: 'The hub could not be found' });
-      }
+      // if (count > 0) {
+      //   res.status(200).json({ message: 'The hub has been nuked' });
+      // } else {
+      //   res.status(404).json({ message: 'The hub could not be found' });
+      // }
+      res.status(200).json({ message: 'The hub has been nuked' });
     })
     .catch(error => {
       // log error to server
